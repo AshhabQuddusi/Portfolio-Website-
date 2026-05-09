@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <!-- ═══════════════════════════════════════════════════════
+       META + TITLE
+  ════════════════════════════════════════════════════════ -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ashhab Quddusi — Software Engineer</title>
+  <meta name="description" content="Portfolio of Ashhab Quddusi — Software Engineering student, web developer, and AI enthusiast based in New Delhi, India." />
+
+  <!-- ═══════════════════════════════════════════════════════
+       GOOGLE FONTS
+       Syne       → headings (bold, modern)
+       DM Sans    → body text (clean, readable)
+       JetBrains Mono → labels, code-like text
+  ════════════════════════════════════════════════════════ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com"    crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet" />
+
+  <!-- ═══════════════════════════════════════════════════════
+       EXTERNAL STYLESHEET
+  ════════════════════════════════════════════════════════ -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════
+     ANIMATED PARTICLE CANVAS
+     Fixed behind all content; drawn entirely by script.js.
+════════════════════════════════════════════════════════════ -->
+<canvas id="bg-canvas"></canvas>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     PAGE WRAPPER  (sits above the canvas via z-index)
+════════════════════════════════════════════════════════════ -->
+<div class="page-wrap">
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       HEADER / NAVIGATION
+       Fixed frosted-glass bar at the top.
+       Nav items are <button> elements — they scroll in-page
+       via scrollToSection() in script.js, NEVER open a new page.
+  ════════════════════════════════════════════════════════ -->
+  <header>
+
+    <!-- Logo — also scrolls back to home on click -->
+    <div class="logo">AQ</div>
+
+    <nav aria-label="Primary navigation">
+
+      <!-- data-section must match the id of the target section -->
+      <button class="nav-btn" data-section="home">Home</button>
+      <button class="nav-btn" data-section="skills">Skills</button>
+      <button class="nav-btn" data-section="experience">Experience</button>
+      <button class="nav-btn" data-section="projects">Projects</button>
+      <button class="nav-btn" data-section="certifications">Certifications</button>
+      <button class="nav-btn" data-section="contact">Contact</button>
+
+      <!-- Dark / light mode toggle — JS handles the icon swap -->
+      <button class="theme-btn" id="theme-toggle" aria-label="Toggle colour theme">🌙</button>
+
+    </nav>
+  </header><!-- /header -->
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       SECTION 1 — HERO
+       Full-viewport landing: name, role, bio, CTA + profile card.
+  ════════════════════════════════════════════════════════ -->
+  <section id="home" class="hero-section">
+    <div class="hero-grid">
+
+      <!-- ── Left column: text content ── -->
+      <div class="hero-left">
+
+        <!-- "Available" status badge -->
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          Open to opportunities
+        </div>
+
+        <!-- Name -->
+        <h1 class="hero-name">
+          Ashhab<br />
+          <span>Quddusi</span>
+        </h1>
+
+        <!-- Role -->
+        <p class="hero-role">Software Engineering Student &amp; Web Developer</p>
+
+        <!-- Short bio -->
+        <p class="hero-desc">
+          Passionate about building elegant, performant software.
+          Currently pursuing B.Tech in Computer Science at Jamia Hamdard University,
+          New Delhi. turning complex problems into clean, scalable solutions.
+        </p>
+
+        <!-- Call-to-action -->
+        <div class="hero-cta">
+          <a class="btn-primary"
+             href="Ashhab Quddusi.pdf"
+             target="_blank"
+             rel="noopener noreferrer">
+            Download Resume
+          </a>
+        </div>
+
+      </div><!-- /hero-left -->
+
+
+      <!-- ── Right column: animated profile card ── -->
+      <div class="hero-visual" aria-hidden="true">
+
+        <!--
+          hero-card-wrap has overflow:visible so the floating tags
+          can appear OUTSIDE the card without being clipped.
+        -->
+        <div class="hero-card-wrap">
+
+          <!-- Floating tag — left of card -->
+          <div class="float-tag float-tag-1">⚡ Full-Stack Dev</div>
+
+          <!-- Profile card -->
+          <div class="hero-card">
+            <!-- Monogram avatar -->
+            <div class="hero-avatar">AQ</div>
+
+            <!-- Name & title inside card -->
+            <div class="card-name">Ashhab Quddusi</div>
+            <div class="card-title">Software Engineer</div>
+
+            <!--
+              Stats row — counts updated here:
+              5 projects | 11 certs | 30+ skills
+            -->
+            <div class="card-stats">
+              <div><div class="stat-num">5+</div><div class="stat-lbl">Projects</div></div>
+              <div><div class="stat-num">11+</div><div class="stat-lbl">Certs</div></div>
+              <div><div class="stat-num">30+</div><div class="stat-lbl">Skills</div></div>
+            </div>
+          </div><!-- /hero-card -->
+
+          <!-- Floating tag — right of card -->
+          <div class="float-tag float-tag-2">🎓 Jamia Hamdard</div>
+
+        </div><!-- /hero-card-wrap -->
+      </div><!-- /hero-visual -->
+
+    </div><!-- /hero-grid -->
+  </section><!-- /home -->
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       SECTION 2 — SKILLS
+       Category-filterable grid of skill cards with progress bars.
+  ════════════════════════════════════════════════════════ -->
+  <div class="section-wrap" id="skills">
+    <div class="section-inner">
+
+      <p class="section-label reveal">Technical Arsenal</p>
+      <h2 class="section-title reveal">Skills &amp; <em>Technologies</em></h2>
+      <p class="section-sub reveal">
+        A versatile skill set spanning languages, frameworks, AI / ML,
+        data tools, and developer workflows.
+      </p>
+
+      <!-- ── Category filter buttons ── -->
+      <!--
+        data-cat must match data-cat on the .skill-card elements below.
+        'all' shows every card.
+      -->
+      <div class="skill-cats reveal">
+        <button class="cat-btn active" data-cat="all">All</button>
+        <button class="cat-btn" data-cat="lang">Languages</button>
+        <button class="cat-btn" data-cat="web">Web</button>
+        <button class="cat-btn" data-cat="data">Data &amp; ML</button>
+        <button class="cat-btn" data-cat="ai">AI / GenAI</button>
+        <button class="cat-btn" data-cat="tools">Tools</button>
+      </div>
+
+      <!-- ── Skill cards grid ── -->
+      <!--
+        data-cat  : filter category
+        data-level: bar fill percentage (0–100), set by JS
+      -->
+      <div class="skills-grid" id="skills-grid">
+
+        <!-- ─ LANGUAGES ─ -->
+        <div class="skill-card" data-cat="lang" data-level="88">
+          <div class="skill-icon">🐍</div>
+          <div class="skill-name">Python</div>
+          <div class="skill-cat">Language</div>
+          <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+        </div>
+
+        <div class="skill-card" data-cat="lang" data-level="80">
+          <div class="skill-icon">🌐</div>
+          <div class="skill-name">JavaScript</div>
+          <div class="skill-cat">Language</div>
+          <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+        </div>
+
+        <!-- <div class="skill-card" data-cat="lang" data-level="74">
+          <div class="skill-icon">☕</div>
+          <div class="skill-name">Java</div>
+          <div class="skill-cat">Language</div>
+          <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+        </div> -->
+
+        <!-- <div class="skill-card" data-cat="lang" data-level="68">
+          <div class="skill-icon">⚙️</div>
+          <div class="skill-name">C / C++</div>
+          <div class="skill-cat">Language</div>
+          <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+        </div> -->
+
+        <!-- ─ WEB ─ -->
+        <div class="skill-card" data-cat="web" data-level="90">
+          <div class="skill-icon">🏗️</div>
+          <div class="skill-name">HTML5</div>
+          <div class="skill-cat">Web</div>
+          <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+        </div>
+
+        <div class="skill-card" data-cat="web" data-level="86">
+          <div class="skill-icon">🎨</div>
+          <div class="skill-name">CSS3</div>
+          <div class="skill-cat">Web</div>
+          <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+        </div>
+
+        <!-- <div class="skill-card" data-cat="web" data-level="72">
+          <div class="skill-icon">⚛️</div>
+          <div class="skill-name">React</div>
+          <div class="skill-cat">Framework</div>
+          <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+        </div> -->
+
+        <div class="skill-card" data-cat="web" data-level="70">
+          <div class="skill-icon">🚀</div>
+          <div class="skill-name">Flask</div>
+          <div class="skill-cat">Backend</div>
+          <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+        </div>
+
+        <div class="skill-card" data-cat="web" data-level="68">
+          <div class="skill-icon">🔗</div>
+          <div class="skill-name">REST APIs</div>
+          <div class="skill-cat">Web</div>
+          <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+        </div>
+
+        <div class="skill-card" data-cat="web" data-level="74">
+          <div class="skill-icon">🎭</div>
+          <div class="skill-name">UI Design</div>
+          <div class="skill-cat">Frontend</div>
+          <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+        </div>
+
+        <div class="skill-card" data-cat="web" data-level="66">
+          <div class="skill-icon">🖥️</div>
+          <div class="skill-name">Front-End Dev</div>
+          <div class="skill-cat">Web</div>
+          <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+        </div>
+
+        <!-- ─ DATA & ML ─ -->
+        <div class="skill-card" data-cat="data" data-level="82">
+          <div class="skill-icon">🗄️</div>
+          <div class="skill-name">MySQL / SQL</div>
+          <div class="skill-cat">Database</div>
+          <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+        </div>
+
+        <div class="skill-card" data-cat="data" data-level="80">
+          <div class="skill-icon">🐼</div>
+          <div class="skill-name">Pandas</div>
+          <div class="skill-cat">Data</div>
+          <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+        </div>
+
+        <div class="skill-card" data-cat="data" data-level="75">
+          <div class="skill-icon">🗃️</div>
+          <div class="skill-name">Data Structures</div>
+          <div class="skill-cat">CS Fundamentals</div>
+          <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+        </div>
+
+        <div class="skill-card" data-cat="data" data-level="70">
+          <div class="skill-icon">🤖</div>
+          <div class="skill-name">Machine Learning</div>
+          <div class="skill-cat">ML</div>
+          <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+        </div>
+
+        <div class="skill-card" data-cat="data" data-level="68">
+          <div class="skill-icon">📊</div>
+          <div class="skill-name">Dashboard Tools</div>
+          <div class="skill-cat">Visualisation</div>
+          <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+        </div>
+
+        <div class="skill-card" data-cat="data" data-level="72">
+          <div class="skill-icon">📚</div>
+          <div class="skill-name">Data Analysis Libs</div>
+          <div class="skill-cat">Data</div>
+          <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+        </div>
+
+        <!-- ─ AI / GENAI ─ -->
+        <div class="skill-card" data-cat="ai" data-level="78">
+          <div class="skill-icon">✨</div>
+          <div class="skill-name">Generative AI</div>
+          <div class="skill-cat">AI</div>
+          <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+        </div>
+
+        <div class="skill-card" data-cat="ai" data-level="76">
+          <div class="skill-icon">💎</div>
+          <div class="skill-name">Google Gemini</div>
+          <div class="skill-cat">AI</div>
+          <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+        </div>
+
+        <div class="skill-card" data-cat="ai" data-level="73">
+          <div class="skill-icon">🖼️</div>
+          <div class="skill-name">Vertex AI / Imagen</div>
+          <div class="skill-cat">Cloud AI</div>
+          <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+        </div>
+
+        <div class="skill-card" data-cat="ai" data-level="72">
+          <div class="skill-icon">💬</div>
+          <div class="skill-name">Prompt Engineering</div>
+          <div class="skill-cat">AI</div>
+          <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+        </div>
+
+        <div class="skill-card" data-cat="ai" data-level="68">
+          <div class="skill-icon">🧠</div>
+          <div class="skill-name">NLP</div>
+          <div class="skill-cat">AI</div>
+          <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+        </div>
+
+        <div class="skill-card" data-cat="ai" data-level="65">
+          <div class="skill-icon">🔌</div>
+          <div class="skill-name">Gemini APIs</div>
+          <div class="skill-cat">AI</div>
+          <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+        </div>
+
+        <!-- ─ TOOLS / PRACTICES ─ -->
+        <div class="skill-card" data-cat="tools" data-level="84">
+          <div class="skill-icon">🐙</div>
+          <div class="skill-name">Git / GitHub</div>
+          <div class="skill-cat">Version Control</div>
+          <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+        </div>
+
+        <div class="skill-card" data-cat="tools" data-level="78">
+          <div class="skill-icon">🔷</div>
+          <div class="skill-name">OOP / UML</div>
+          <div class="skill-cat">Design</div>
+          <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+        </div>
+
+        <div class="skill-card" data-cat="tools" data-level="74">
+          <div class="skill-icon">🏗</div>
+          <div class="skill-name">OO Design</div>
+          <div class="skill-cat">Architecture</div>
+          <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+        </div>
+
+        <div class="skill-card" data-cat="tools" data-level="73">
+          <div class="skill-icon">🧪</div>
+          <div class="skill-name">Python Testing</div>
+          <div class="skill-cat">QA</div>
+          <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+        </div>
+
+        <div class="skill-card" data-cat="tools" data-level="72">
+          <div class="skill-icon">🤖</div>
+          <div class="skill-name">Test Automation</div>
+          <div class="skill-cat">QA</div>
+          <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+        </div>
+
+        <div class="skill-card" data-cat="tools" data-level="70">
+          <div class="skill-icon">🔍</div>
+          <div class="skill-name">Code Review</div>
+          <div class="skill-cat">Practice</div>
+          <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+        </div>
+
+        <div class="skill-card" data-cat="tools" data-level="70">
+          <div class="skill-icon">✅</div>
+          <div class="skill-name">Code Quality</div>
+          <div class="skill-cat">Practice</div>
+          <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+        </div>
+
+        <div class="skill-card" data-cat="tools" data-level="68">
+          <div class="skill-icon">🐛</div>
+          <div class="skill-name">Debugging</div>
+          <div class="skill-cat">Practice</div>
+          <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+        </div>
+
+        <div class="skill-card" data-cat="tools" data-level="66">
+          <div class="skill-icon">🐚</div>
+          <div class="skill-name">Shell Scripting</div>
+          <div class="skill-cat">Tools</div>
+          <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+        </div>
+
+        <div class="skill-card" data-cat="tools" data-level="65">
+          <div class="skill-icon">🗂️</div>
+          <div class="skill-name">Virtual Environments</div>
+          <div class="skill-cat">Tools</div>
+          <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+        </div>
+
+        <div class="skill-card" data-cat="tools" data-level="65">
+          <div class="skill-icon">🛠️</div>
+          <div class="skill-name">Error Handling</div>
+          <div class="skill-cat">Practice</div>
+          <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+        </div>
+
+        <div class="skill-card" data-cat="tools" data-level="72">
+          <div class="skill-icon">💡</div>
+          <div class="skill-name">Problem Solving</div>
+          <div class="skill-cat">Soft Skill</div>
+          <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+        </div>
+
+        <div class="skill-card" data-cat="tools" data-level="70">
+          <div class="skill-icon">💬</div>
+          <div class="skill-name">Communication</div>
+          <div class="skill-cat">Soft Skill</div>
+          <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+        </div>
+
+      </div><!-- /skills-grid -->
+
+    </div><!-- /section-inner -->
+  </div><!-- /skills -->
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       SECTION 3 — EXPERIENCE
+       Vertical timeline of simulations & activities.
+       (Jamia Hamdard B.Tech removed per request.)
+  ════════════════════════════════════════════════════════ -->
+  <div class="section-wrap" id="experience">
+    <div class="section-inner">
+
+      <p class="section-label reveal">Career Path</p>
+      <h2 class="section-title reveal">Work <em>Experience</em></h2>
+      <p class="section-sub reveal">
+        Industry simulations and student leadership roles shaping my engineering foundation.
+      </p>
+
+      <div class="timeline">
+
+        <!-- ── Timeline entry 1: Quantium ── -->
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-card">
+            <!-- <div class="tl-period">Jan 2026</div> -->
+            <div class="tl-org">Quantium</div>
+            <div class="tl-role">Software Engineering Job Simulation — Forage</div>
+            <div class="tl-desc">
+              Analysed large-scale retail datasets with Python &amp; Pandas.
+              Built interactive dashboards and implemented automated test suites
+              to ensure code reliability across data pipelines.
+            </div>
+            <div class="tl-tags">
+              <span class="tl-tag">Python</span>
+              <span class="tl-tag">Pandas</span>
+              <span class="tl-tag">Test Automation</span>
+              <span class="tl-tag">Shell Scripting</span>
+              <span class="tl-tag">Data Management</span>
+              <span class="tl-tag">Virtual Environments</span>
+              <span class="tl-tag">Dashboard Tools</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Timeline entry 2: EA ── -->
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-card">
+            <!-- <div class="tl-period">Feb 2026</div> -->
+            <div class="tl-org">Electronic Arts (EA)</div>
+            <div class="tl-role">Software Engineering Job Simulation — Forage</div>
+            <div class="tl-desc">
+              Designed scalable system architecture using advanced OOP and UML diagrams.
+              Applied code quality and code review practices used in professional
+              game development workflows.
+            </div>
+            <div class="tl-tags">
+              <span class="tl-tag">Java</span>
+              <span class="tl-tag">OOP</span>
+              <span class="tl-tag">UML</span>
+              <span class="tl-tag">Code Quality</span>
+              <span class="tl-tag">Game Dev</span>
+              <span class="tl-tag">Code Review</span>
+              <span class="tl-tag">OO Design</span>
+              <span class="tl-tag">Product Management</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Timeline entry 3: HackerRank ── -->
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-card">
+            <!-- <div class="tl-period">May 2025</div> -->
+            <div class="tl-org">HackerRank</div>
+            <div class="tl-role">Software Engineer Intern — Certified</div>
+            <div class="tl-desc">
+              Earned the Software Engineer Intern certification, validating skills
+              in SQL query design, algorithmic problem solving, and software fundamentals.
+            </div>
+            <div class="tl-tags">
+              <span class="tl-tag">SQL</span>
+              <span class="tl-tag">Problem Solving</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Timeline entry 4: IEEE ── -->
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-card">
+            <!-- <div class="tl-period">2025 — Present</div> -->
+            <div class="tl-org">IEEE Jamia Hamdard Student Branch</div>
+            <div class="tl-role">Active Member &amp; Technical Contributor</div>
+            <div class="tl-desc">
+              Participated in Technozova technical competitions and industry workshops.
+              Collaborated on cross-functional engineering projects enhancing leadership
+              and communication skills.
+            </div>
+            <div class="tl-tags">
+              <span class="tl-tag">Teamwork</span>
+              <span class="tl-tag">Leadership</span>
+              <span class="tl-tag">Problem Solving</span>
+              <span class="tl-tag">Communication</span>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /timeline -->
+
+    </div><!-- /section-inner -->
+  </div><!-- /experience -->
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       SECTION 4 — PROJECTS
+       5 projects sourced from GitHub / LinkedIn skills list.
+  ════════════════════════════════════════════════════════ -->
+  <div class="section-wrap" id="projects">
+    <div class="section-inner">
+
+      <p class="section-label reveal">What I've Built</p>
+      <h2 class="section-title reveal">Featured <em>Projects</em></h2>
+      <p class="section-sub reveal">
+        A selection of personal and academic projects showcasing full-stack development,
+        AI integration, and systems programming.
+      </p>
+
+      <div class="projects-grid">
+
+        <!-- ── Project 1: JobNest ── -->
+        <div class="proj-card">
+          <div class="proj-header">
+            <div class="proj-icon">🤖</div>
+            <div class="proj-links">
+              <a href="https://github.com/AshhabQuddusi/JobNest" target="_blank" rel="noopener"
+                 class="proj-link" title="View on GitHub">🐙</a>
+            </div>
+          </div>
+          <div class="proj-name">JobNest — AI Powered Recruitment Platform</div>
+          <div class="proj-desc">
+            An end-to-end AI-driven recruitment platform that matches candidates to jobs
+            using NLP and ML models. Features a REST API backend built with Flask,
+            MySQL for data management, and a React frontend with modern UI design.
+          </div>
+          <div class="proj-tags">
+            <span class="proj-tag">Python</span>
+            <span class="proj-tag">Flask</span>
+            <span class="proj-tag">MySQL</span>
+            <span class="proj-tag">React</span>
+            <span class="proj-tag">NLP</span>
+            <span class="proj-tag">REST API</span>
+            <span class="proj-tag">AI</span>
+            <span class="proj-tag">Error Handling</span>
+          </div>
+        </div>
+
+        <!-- ── Project 2: Binance Trading Bot ── -->
+        <div class="proj-card">
+          <div class="proj-header">
+            <div class="proj-icon">📈</div>
+            <div class="proj-links">
+              <a href="https://github.com/AshhabQuddusi/Binance-futures-trading-bot" target="_blank" rel="noopener"
+                 class="proj-link" title="View on GitHub">🐙</a>
+            </div>
+          </div>
+          <div class="proj-name">Binance Futures Trading Bot</div>
+          <div class="proj-desc">
+            An automated cryptocurrency trading bot for Binance Futures with configurable
+            strategy execution, robust error handling, REST API integration, and Python
+            test suites to validate trading logic.
+          </div>
+          <div class="proj-tags">
+            <span class="proj-tag">Python</span>
+            <span class="proj-tag">REST APIs</span>
+            <span class="proj-tag">Error Handling</span>
+            <span class="proj-tag">Python Testing</span>
+            <span class="proj-tag">Problem Solving</span>
+          </div>
+        </div>
+
+        <!-- ── Project 3: Library Management System ── -->
+        <div class="proj-card">
+          <div class="proj-header">
+            <div class="proj-icon">📚</div>
+            <div class="proj-links">
+              <a href="https://github.com/AshhabQuddusi/Library-Management-System" target="_blank" rel="noopener"
+                 class="proj-link" title="View on GitHub">🐙</a>
+            </div>
+          </div>
+          <div class="proj-name">Library Management System</div>
+          <div class="proj-desc">
+            A fully OOP-designed library management system in C++ with real-world entity
+            modelling, robust logic building, and systematic debugging — implementing core
+            data structures for efficient book and member management.
+          </div>
+          <div class="proj-tags">
+            <span class="proj-tag">C++</span>
+            <span class="proj-tag">OOP</span>
+            <span class="proj-tag">Data Structures</span>
+            <span class="proj-tag">Logic Building</span>
+            <span class="proj-tag">Debugging</span>
+            <span class="proj-tag">Python</span>
+          </div>
+        </div>
+
+        <!-- ── Project 4: Learn Tech Website ── -->
+        <div class="proj-card">
+          <div class="proj-header">
+            <div class="proj-icon">🎓</div>
+            <div class="proj-links">
+              <a href="https://github.com/AshhabQuddusi/Learn-Tech-Website" target="_blank" rel="noopener"
+                 class="proj-link" title="View on GitHub">🐙</a>
+            </div>
+          </div>
+          <div class="proj-name">Learn Tech Website</div>
+          <div class="proj-desc">
+            A responsive educational web platform for learning technology concepts,
+            built with HTML, CSS, and JavaScript. Focused on front-end development,
+            clean UX, and problem-solving content delivery.
+          </div>
+          <div class="proj-tags">
+            <span class="proj-tag">HTML</span>
+            <span class="proj-tag">CSS</span>
+            <span class="proj-tag">JavaScript</span>
+            <span class="proj-tag">Frontend</span>
+            <span class="proj-tag">UI Design</span>
+            <span class="proj-tag">Problem Solving</span>
+          </div>
+        </div>
+
+        <!-- ── Project 5: Portfolio Website ── -->
+        <div class="proj-card">
+          <div class="proj-header">
+            <div class="proj-icon">🌐</div>
+            <div class="proj-links">
+              <a href="https://github.com/AshhabQuddusi/Portfolio-Website"
+                 target="_blank" rel="noopener"
+                 class="proj-link" title="View on GitHub">🐙</a>
+              <a href="https://ashhabquddusi.github.io/Portfolio-Website/"
+                 target="_blank" rel="noopener"
+                 class="proj-link" title="Live Demo">🔗</a>
+            </div>
+          </div>
+          <div class="proj-name">Personal Portfolio Website</div>
+          <div class="proj-desc">
+            This very site — a responsive single-page portfolio with dark / light mode,
+            smooth in-page scrolling, animated particle background, skill filtering,
+            and a professional UI built purely with HTML, CSS &amp; JavaScript.
+          </div>
+          <div class="proj-tags">
+            <span class="proj-tag">HTML</span>
+            <span class="proj-tag">CSS</span>
+            <span class="proj-tag">JavaScript</span>
+            <span class="proj-tag">Animations</span>
+            <span class="proj-tag">Responsive</span>
+            <span class="proj-tag">Web Dev</span>
+          </div>
+        </div>
+
+      </div><!-- /projects-grid -->
+
+    </div><!-- /section-inner -->
+  </div><!-- /projects -->
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       SECTION 5 — CERTIFICATIONS
+       All 11 real certificates from LinkedIn, with credential links.
+  ════════════════════════════════════════════════════════ -->
+  <div class="section-wrap" id="certifications">
+    <div class="section-inner">
+
+      <p class="section-label reveal">Achievements</p>
+      <h2 class="section-title reveal">Licenses &amp; <em>Certifications</em></h2>
+      <p class="section-sub reveal">
+        Industry-recognised credentials validating my expertise across software engineering,
+        data analytics, AI, and web development.
+      </p>
+
+      <div class="certs-grid">
+
+        <!-- ── Cert 1: Python Developer ── -->
+        <div class="cert-card">
+          <div class="cert-icon">🐍</div>
+          <div class="cert-body">
+            <div class="cert-name">Python Developer Certification</div>
+            <div class="cert-issuer">freeCodeCamp</div>
+            <div class="cert-date">Issued Feb 2026 · ID: ashhabquddusi-pyv9</div>
+            <div class="cert-skills">
+              <span class="cert-skill">OOP</span>
+              <span class="cert-skill">Code Review</span>
+              <span class="cert-skill">Python</span>
+            </div>
+            <a class="cert-link"
+               href="https://freecodecamp.org/certification/ashhabquddusi/python-v9"
+               target="_blank" rel="noopener">View Credential →</a>
+          </div>
+        </div>
+
+        <!-- ── Cert 2: Quantium ── -->
+        <div class="cert-card">
+          <div class="cert-icon">📉</div>
+          <div class="cert-body">
+            <div class="cert-name">Quantium — Software Engineering Job Simulation</div>
+            <div class="cert-issuer">Forage</div>
+            <div class="cert-date">Issued Feb 2026 · ID: bxHwNAc5YS8QpQvjL</div>
+            <div class="cert-skills">
+              <span class="cert-skill">Test Automation</span>
+              <span class="cert-skill">Python Testing</span>
+              <span class="cert-skill">Shell Scripting</span>
+              <span class="cert-skill">Data Management</span>
+            </div>
+            <a class="cert-link"
+               href="https://www.theforage.com/completion-certificates/32A6DqtsbF7LbKdcq/jhiG2W9K8KLZK8nXP_32A6DqtsbF7LbKdcq_696a1b178d5b9c666d16f9d7_1770820562251_completion_certificate.pdf"
+               target="_blank" rel="noopener">View Credential →</a>
+          </div>
+        </div>
+
+        <!-- ── Cert 3: EA ── -->
+        <div class="cert-card">
+          <div class="cert-icon">🎮</div>
+          <div class="cert-body">
+            <div class="cert-name">Electronic Arts — Software Engineering Job Simulation</div>
+            <div class="cert-issuer">Forage</div>
+            <div class="cert-date">Issued Feb 2026 · ID: hKYsFWAWTroA72q7S</div>
+            <div class="cert-skills">
+              <span class="cert-skill">Code Quality</span>
+              <span class="cert-skill">Game Dev</span>
+              <span class="cert-skill">OOP</span>
+              <span class="cert-skill">OO Design</span>
+            </div>
+            <a class="cert-link"
+               href="https://www.theforage.com/completion-certificates/j43dGscQHtJJ57N54/a77WE3de8qrxWferQ_j43dGscQHtJJ57N54_696a1b178d5b9c666d16f9d7_1770811447317_completion_certificate.pdf"
+               target="_blank" rel="noopener">View Credential →</a>
+          </div>
+        </div>
+
+        <!-- ── Cert 4: DSA — Amazon ── -->
+        <div class="cert-card">
+          <div class="cert-icon">🏛️</div>
+          <div class="cert-body">
+            <div class="cert-name">Data Structures and Algorithms</div>
+            <div class="cert-issuer">Amazon / Coursera</div>
+            <div class="cert-date">Issued Jan 2026 · ID: JYW60RHB3X1J</div>
+            <div class="cert-skills">
+              <span class="cert-skill">Data Structures</span>
+              <span class="cert-skill">Java</span>
+              <span class="cert-skill">GitHub</span>
+              <span class="cert-skill">Software Dev</span>
+            </div>
+            <a class="cert-link"
+               href="https://www.coursera.org/account/accomplishments/records/JYW60RHB3X1J"
+               target="_blank" rel="noopener">View Credential →</a>
+          </div>
+        </div>
+
+        <!-- ── Cert 5: HackerRank SWE Intern ── -->
+        <div class="cert-card">
+          <div class="cert-icon">💻</div>
+          <div class="cert-body">
+            <div class="cert-name">Software Engineer Intern</div>
+            <div class="cert-issuer">HackerRank</div>
+            <div class="cert-date">Issued May 2025 · ID: 442593788050</div>
+            <div class="cert-skills">
+              <span class="cert-skill">SQL</span>
+              <span class="cert-skill">Problem Solving</span>
+            </div>
+            <a class="cert-link"
+               href="https://www.hackerrank.com/certificates/442593788050"
+               target="_blank" rel="noopener">View Credential →</a>
+          </div>
+        </div>
+
+        <!-- ── Cert 6: Gemini + Imagen (Aug 2025) ── -->
+        <div class="cert-card">
+          <div class="cert-icon">🤖</div>
+          <div class="cert-body">
+            <div class="cert-name">Build Real World AI Apps with Gemini &amp; Imagen</div>
+            <div class="cert-issuer">Google</div>
+            <div class="cert-date">Issued Aug 2025</div>
+            <div class="cert-skills">
+              <span class="cert-skill">Google Gemini</span>
+              <span class="cert-skill">Imagen</span>
+              <span class="cert-skill">NLP</span>
+              <span class="cert-skill">Vertex AI</span>
+            </div>
+            <a class="cert-link"
+               href="https://www.credly.com/badges/6b73b164-674b-4ec5-b5aa-b4f0f2066311/linked_in_profile"
+               target="_blank" rel="noopener">View Credential →</a>
+          </div>
+        </div>
+
+        <!-- ── Cert 7: Explore GenAI Vertex AI ── -->
+        <div class="cert-card">
+          <div class="cert-icon">✨</div>
+          <div class="cert-body">
+            <div class="cert-name">Explore Generative AI with Vertex AI Gemini API</div>
+            <div class="cert-issuer">Google</div>
+            <div class="cert-date">Issued Aug 2025</div>
+            <div class="cert-skills">
+              <span class="cert-skill">Google Gemini</span>
+              <span class="cert-skill">Generative AI</span>
+              <span class="cert-skill">Vertex AI</span>
+            </div>
+            <a class="cert-link"
+               href="https://www.credly.com/badges/e995c790-e54e-444d-b57f-bc312b852504/linked_in_profile"
+               target="_blank" rel="noopener">View Credential →</a>
+          </div>
+        </div>
+
+        <!-- ── Cert 8: Gemini Multimodality RAG ── -->
+        <div class="cert-card">
+          <div class="cert-icon">📄</div>
+          <div class="cert-body">
+            <div class="cert-name">Inspect Rich Documents with Gemini Multimodality &amp; RAG</div>
+            <div class="cert-issuer">Google</div>
+            <div class="cert-date">Issued Aug 2025</div>
+            <div class="cert-skills">
+              <span class="cert-skill">Google Gemini</span>
+              <span class="cert-skill">AI</span>
+              <span class="cert-skill">Vertex AI</span>
+            </div>
+            <a class="cert-link"
+               href="https://www.credly.com/badges/09ac7a00-669a-4801-bfc7-80f26cc19a11/linked_in_profile"
+               target="_blank" rel="noopener">View Credential →</a>
+          </div>
+        </div>
+
+        <!-- ── Cert 9: Prompt Design Vertex AI ── -->
+        <div class="cert-card">
+          <div class="cert-icon">💬</div>
+          <div class="cert-body">
+            <div class="cert-name">Prompt Design in Vertex AI</div>
+            <div class="cert-issuer">Google</div>
+            <div class="cert-date">Issued Apr 2025</div>
+            <div class="cert-skills">
+              <span class="cert-skill">Generative AI</span>
+              <span class="cert-skill">Prompt Engineering</span>
+              <span class="cert-skill">Gemini APIs</span>
+            </div>
+            <a class="cert-link"
+               href="https://www.credly.com/badges/947de5ed-48fa-418c-a839-a9f257ac2d66/linked_in_profile"
+               target="_blank" rel="noopener">View Credential →</a>
+          </div>
+        </div>
+
+        <!-- ── Cert 10: freeCodeCamp JS Algorithms ── -->
+        <div class="cert-card">
+          <div class="cert-icon">🟨</div>
+          <div class="cert-body">
+            <div class="cert-name">Legacy JavaScript Algorithms and Data Structures</div>
+            <div class="cert-issuer">freeCodeCamp</div>
+            <div class="cert-date">Issued Aug 2024 · ID: ashhabquddusi</div>
+            <div class="cert-skills">
+              <span class="cert-skill">JavaScript</span>
+              <span class="cert-skill">Data Structures</span>
+              <span class="cert-skill">Algorithms</span>
+            </div>
+            <a class="cert-link"
+               href="https://freecodecamp.org/certification/AshhabQuddusi/javascript-algorithms-and-data-structures"
+               target="_blank" rel="noopener">View Credential →</a>
+          </div>
+        </div>
+
+        <!-- ── Cert 11: Gemini + Imagen duplicate entry ── -->
+        <div class="cert-card">
+          <div class="cert-icon">🖼️</div>
+          <div class="cert-body">
+            <div class="cert-name">Build Real World AI Apps with Gemini &amp; Imagen (II)</div>
+            <div class="cert-issuer">Google</div>
+            <div class="cert-date">Issued Aug 2025</div>
+            <div class="cert-skills">
+              <span class="cert-skill">Google Gemini</span>
+              <span class="cert-skill">Imagen</span>
+              <span class="cert-skill">AI</span>
+            </div>
+            <a class="cert-link"
+               href="https://www.credly.com/badges/6b73b164-674b-4ec5-b5aa-b4f0f2066311/linked_in_profile"
+               target="_blank" rel="noopener">View Credential →</a>
+          </div>
+        </div>
+
+      </div><!-- /certs-grid -->
+
+    </div><!-- /section-inner -->
+  </div><!-- /certifications -->
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       SECTION 6 — CONTACT
+       Contact links + short pitch. No form, no "Get in Touch" button.
+  ════════════════════════════════════════════════════════ -->
+  <div class="section-wrap" id="contact">
+    <div class="section-inner">
+
+      <p class="section-label reveal">Let's Connect</p>
+      <h2 class="section-title reveal">Find Me <em>Online</em></h2>
+      <p class="section-sub reveal">
+        Feel free to reach out via email or connect with me on LinkedIn and GitHub.
+      </p>
+
+      <div class="contact-wrap">
+
+        <!-- Left: clickable contact link rows -->
+        <div class="contact-links reveal">
+
+          <a href="mailto:ashhabquddusi4@gmail.com" class="contact-link">
+            <div class="cl-icon">📧</div>
+            <div>
+              <div class="cl-label">Email</div>
+              <div class="cl-value">ashhabquddusi4@gmail.com</div>
+            </div>
+          </a>
+
+          <a href="https://www.linkedin.com/in/ashhab-quddusi/"
+             target="_blank" rel="noopener" class="contact-link">
+            <div class="cl-icon">💼</div>
+            <div>
+              <div class="cl-label">LinkedIn</div>
+              <div class="cl-value">linkedin.com/in/ashhab-quddusi</div>
+            </div>
+          </a>
+
+          <a href="https://github.com/AshhabQuddusi"
+             target="_blank" rel="noopener" class="contact-link">
+            <div class="cl-icon">🐙</div>
+            <div>
+              <div class="cl-label">GitHub</div>
+              <div class="cl-value">github.com/AshhabQuddusi</div>
+            </div>
+          </a>
+
+          <!-- Location (not clickable) -->
+          <div class="contact-link" style="cursor: default;">
+            <div class="cl-icon">📍</div>
+            <div>
+              <div class="cl-label">Location</div>
+              <div class="cl-value">New Delhi, India</div>
+            </div>
+          </div>
+
+        </div><!-- /contact-links -->
+
+        <!-- Right: short blurb / pitch -->
+        <div class="contact-blurb reveal">
+          <div class="contact-blurb-heading">
+            Open to internships,<br />
+            collaborations &amp; exciting projects.
+          </div>
+          <p class="contact-blurb-text">
+            I'm a Computer Science student at Jamia Hamdard with hands-on experience
+            in full-stack development, AI integration, and data analytics.
+            Always eager to learn, build, and contribute to meaningful work.
+          </p>
+          <a href="mailto:ashhabquddusi4@gmail.com" class="btn-primary">
+            Say Hello →
+          </a>
+        </div>
+
+      </div><!-- /contact-wrap -->
+
+    </div><!-- /section-inner -->
+  </div><!-- /contact -->
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       FOOTER
+  ════════════════════════════════════════════════════════ -->
+  <footer>
+    <p>Designed &amp; Built by <span>Ashhab Quddusi</span> · © 2026 · All rights reserved</p>
+  </footer>
+
+
+</div><!-- /page-wrap -->
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     EXTERNAL JAVASCRIPT
+     Loaded at bottom so the DOM is fully parsed before JS runs.
+════════════════════════════════════════════════════════════ -->
+<script src="script.js"></script>
+
+</body>
+</html>
