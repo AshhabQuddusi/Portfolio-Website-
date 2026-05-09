@@ -82,7 +82,7 @@ Typing animation
 
 ## 👨‍💻 Author
 
-**Ashhab**  
+**Ashhab Quddusi**  
 B.Tech Computer Science and Engineering Student at Jamia Hamdard University  
 Interested in Software Development, Data Structures & Algorithms, and Web Development.
 
