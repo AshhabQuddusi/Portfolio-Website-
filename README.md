@@ -19,7 +19,7 @@ JavaScript – Interactivity and animations
 
 ## 🌐 Live Demo
 
-Visit the live portfolio website here: https://ashhabquddusi.github.io/Portfolio-Website-/
+Visit the live portfolio website here: https://ashhabquddusi.github.io/Portfolio-Website/
 
 - 🚀 Live Website: 
 
@@ -35,7 +35,7 @@ portfolio/
 
 🚀 Getting Started
 1. Clone the Repository
-git clone https://github.com/Ashhab-Quddusi/portfolio.git
+git clone https://github.com/AshhabQuddusi/Portfolio-Website
 2. Navigate to the Project Folder
 cd portfolio
 3. Open in Browser
