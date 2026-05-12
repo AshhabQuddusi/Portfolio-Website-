@@ -1,6 +1,6 @@
 Personal Portfolio Website
 
-A responsive, modern personal portfolio website built with HTML, CSS, and JavaScript. This project showcases your profile, skills, projects, resume, and contact information in a clean and professional design.
+A responsive, modern personal portfolio website built with HTML, CSS, and JavaScript. This project showcases my profile, skills, projects, resume, and contact information in a clean and professional design.
 
 📌 Features
 Responsive design for desktop, tablet, and mobile devices
@@ -19,7 +19,7 @@ JavaScript – Interactivity and animations
 
 ## 🌐 Live Demo
 
-Visit the live portfolio website here: https://ashhabquddusi.github.io/Portfolio-Website/
+Visit the live portfolio website here: https://ashhabquddusi.vercel.app/
 
 - 🚀 Live Website: 
 
@@ -66,19 +66,6 @@ The portfolio is fully responsive and optimised for:
 Desktop 💻
 Tablet 📱
 Mobile 📲
-🌐 Deployment Options
-
-You can deploy this portfolio for free using:
-
-GitHub Pages
-Netlify
-Vercel
-📈 Future Enhancements
-Dark/Light mode toggle
-Blog section
-Project filtering
-Form submission with EmailJS
-Typing animation
 
 ## 👨‍💻 Author
 
